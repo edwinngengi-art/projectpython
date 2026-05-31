@@ -36,7 +36,7 @@ def calculate_average_word_length(text):
     words = re.findall(r'\b\w+\b', text)
 
     if len(words) == 0:
-        return 0.0
+        return 0
 
     total = 0
 
@@ -47,28 +47,39 @@ def calculate_average_word_length(text):
 
 
 def count_paragraphs(text):
+    if text == "":
+        return 1
+
     paragraphs = [p for p in text.split("\n\n") if p.strip()]
     return len(paragraphs)
 
 
 def count_sentences(text):
+    if text == "":
+        return 1
+
     return len(re.findall(r'[.!?]', text))
 
 
-with open("news_article.txt", "r", encoding="utf-8") as file:
-    article = file.read()
+def main():
+    with open("news_article.txt", "r", encoding="utf-8") as file:
+        article = file.read()
 
-word = input("Enter a word: ")
+    word = input("Enter a word: ")
 
-print("Word Count:", count_specific_word(article, word))
-print("Most Common Word:", identify_most_common_word(article))
-print("Average Word Length:", calculate_average_word_length(article))
-print("Paragraph Count:", count_paragraphs(article))
-print("Sentence Count:", count_sentences(article))
+    print("Word Count:", count_specific_word(article, word))
+    print("Most Common Word:", identify_most_common_word(article))
+    print("Average Word Length:", calculate_average_word_length(article))
+    print("Paragraph Count:", count_paragraphs(article))
+    print("Sentence Count:", count_sentences(article))
 
-choice = "y"
+    choice = "y"
 
-while choice.lower() == "y":
-    choice = input("Type y to continue: ")
+    while choice.lower() == "y":
+        choice = input("Type y to continue: ")
 
-print("Done")
+    print("Done")
+
+
+if __name__ == "__main__":
+    main()
